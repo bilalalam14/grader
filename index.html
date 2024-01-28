@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .fail{
+        color: red;
+    }
+
+    .pass{
+        color: teal;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #007FFF, darkblue);
+        padding: 10px;
+    }
+
+    .todoApp {
+        display: flex;
+        justify-content: space-evenly;
+        position: relative;
+        max-height: 700px;
+        overflow-y: auto;
+        max-width: 90%;
+        background: white;
+        margin: 50px auto;
+        padding: 40px 0px 70px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        z-index: 10000000000;
+    }
+
+    .todoApp h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: navy;
+        margin-bottom: 20px;
+
+    }
+
+    input {
+        /* flex: 1; */
+        background: transparent;
+        padding: 10px;
+    }
+
+
+    button {
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        margin: 5px;
+        background: #007FFF;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+
+    h1 {
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        color: white;
+    }
+
+    h3 {
+        padding-bottom: 10px;
+        color: navy;
+    }
+
+    .result {}
+</style>
+
+<body>
+
+    <div class="container">
+        <h1>Marksheet Grader</h1>
+        <div class="todoApp">
+            <div class="result">
+                <h2>Enter percentage (%) obtained to get Graded!</h2>
+                <h3>Physics</h3>
+                <input type="number" max="100" id="physicsMarks"> <span>%</span>
+                <br>
+                <br>
+                <h3>Chemistry</h3>
+                <input type="number" max="100" id="chemMarks"> <span>%</span>
+                <br>
+                <br>
+                <h3>Matematics</h3>
+                <input type="number" max="100" id="mathsMarks"> <span>%</span><br>
+                <button onclick="calculator()">Calculate</button>
+            </div>
+            <div class="grades">
+                <br><br><br><br>
+                <h3>Aggregated percentage</h3>
+                <p class="percent"></p>
+                <br><br><br>
+                <h3>Grade</h3>
+                <p class="grd"></p>
+                <br><br><br>
+                <h3>Comment</h3>
+                <p class="cmt"></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculator() {
+
+            const phyMarks = document.querySelector("#physicsMarks").value
+            const chemMarks = document.querySelector("#chemMarks").value
+            const mathMarks = document.querySelector("#mathsMarks").value
+
+            console.log(phyMarks)
+            if (isNaN(phyMarks) || isNaN(chemMarks) || isNaN(mathMarks)) {
+                alert("Enter marks for all subjects!")
+            } else {
+                let total = +phyMarks + +chemMarks + +mathMarks
+                let avg = total / 3
+                avg = avg.toFixed(2);
+                document.querySelector(".percent").innerHTML=avg + "%";
+                if (avg >= 70) {
+                    document.querySelector(".grd").innerHTML = "Your grade is <span class='pass'>A</span>"
+                    document.querySelector(".cmt").innerHTML = "Welcome!"
+                } else{
+                    document.querySelector(".grd").innerHTML = "Your grade is <span class='fail'>F</span>"
+                    document.querySelector(".cmt").innerHTML = "Better luck next time!"
+                }
+            }
+        }
+
+        const listContainer = document.querySelector("#listContainer")
+
+    </script>
+
+</body>
+
+</html>
